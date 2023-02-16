@@ -3,42 +3,61 @@
 * {
   font-family: "Open Sans", sans-serif;
 }
-
-body {
+h1 {
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-direction: column;
+}
+
+#list {
+  display: flex;
+  justify-content: center;
+}
+
+#list input {
+  border: 1px solid #000;
+  padding: 5px;
+  border-radius: 4px;
+  margin-right: 5px;
 }
 
 button {
-  border: 1px solid rgb(105, 197, 255);
-  border-radius: 5px;
-  background-color: rgb(227, 248, 255);
-  color: rgb(105, 197, 255);
-  text-align: center;
+  background-color: #3179ff;
+  color: #FFFFFF;
   padding: 5px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-input[type="text"] {
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid black;
+#task {
+  display: flex;
+  justify-content: center;
 }
 
-#tasks {
+#task ul {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  padding: 40px;
 }
 
-.task-item {
+#task li {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  width: 100%;
+  padding: 15px;
 }
 
-:checked + label {
-  text-decoration: line-through;
-  color: grey;
+#task a {
+  list-style: none;
+  text-decoration: none;
+  background-color: #fd6969;
+  color: #FFFFFF;
+  padding: 5px;
+  margin-left: 40px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  cursor: pointer;
 }

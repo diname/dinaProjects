@@ -1,29 +1,57 @@
-const form = document.getElementById('task-form');
-const taskList = document.getElementById('tasks');
 
-form.onsubmit = function (e) {
-	e.preventDefault();
-	const inputField = document.getElementById('task-input');
-	addTask(inputField.value);
-	form.reset();
-};
+let listElement = document.querySelector("#task ul");
+let inputElement = document.querySelector("#list input");
+let buttonElement = document.querySelector("#list button");
 
-function addTask(description) {
-	const taskContainer = document.createElement('div');
-	const newTask = document.createElement('input');
-	const taskLabel = document.createElement('label');
-	const taskDescriptionNode = document.createTextNode(description);
 
-	newTask.setAttribute('type', 'checkbox');
-	newTask.setAttribute('name', description);
-	newTask.setAttribute('id', description);
+let tarefas = JSON.parse(localStorage.getItem("@listaTarefas")) || [];
 
-	taskLabel.setAttribute('for', description);
-	taskLabel.appendChild(taskDescriptionNode);
+function renderTarefas(){
+	listElement.innerHTML = "";
 
-	taskContainer.classList.add('task-item');
-	taskContainer.appendChild(newTask);
-	taskContainer.appendChild(taskLabel);
+	tarefas.map((todo) => {
+		let liElement = document.createElement("li");
+		let tarefaText = document.createTextNode(todo);
 
-	taskList.appendChild(taskContainer);
+		let linkElement = document.createElement("a");
+		linkElement.setAttribute("href", "#");
+
+		let linkText = document.createTextNode("Excluir");
+		linkElement.appendChild(linkText);
+
+		let posicao = tarefas.indexOf(todo);
+
+		linkElement.setAttribute("onclick", `deletarTarefa( ${posicao} )`);
+
+		liElement.appendChild(tarefaText);
+		liElement.appendChild(linkElement);
+		listElement.appendChild(liElement);
+	})
+}
+
+renderTarefas();
+
+function adicionarTarefas(){
+	if(inputElement.value === '') {
+		alert('Digite alguma tarefa');
+		return false;
+	}else{
+		let novaTarefa = inputElement.value;
+		tarefas.push(novaTarefa);
+		inputElement.value = '';
+		renderTarefas();
+		salvarDados();
+	}
+}
+
+buttonElement.onclick = adicionarTarefas;
+
+function deletarTarefa(posicao) {
+	tarefas.splice(posicao, 1);
+	renderTarefas();
+	salvarDados();
+}
+
+function salvarDados() {
+	localStorage.setItem("@listaTarefas", JSON.stringify(tarefas) );
 }

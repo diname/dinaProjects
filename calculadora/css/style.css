@@ -16,6 +16,7 @@ input {
     font-size: 30px;
     font-family: 'Bebas Neue', cursive;
     border-radius: 25%;
+    cursor: pointer;
 }
 
 .num {
